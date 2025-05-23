@@ -1,1 +1,2 @@
-This is from initramfs!
+Hello from CPIO archive!
+This is a test file to verify CPIO functionality.

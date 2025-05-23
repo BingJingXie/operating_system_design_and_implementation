@@ -9,7 +9,7 @@ volatile uint32_t mbox_buffer_board[7] __attribute__((aligned(16)));
 /**
  * Send the property‐tag message in mbox_buffer over 'channel' and wait for reply.
  */
-int mbox_call(uint8_t channel , uint32_t mbox_buffer[]) {
+int mbox_call(uint8_t channel , volatile uint32_t mbox_buffer[]) {
     uint32_t addr = ((uint32_t)((uintptr_t)mbox_buffer) & ~0xF) | (channel & 0xF);
     // Wait until mailbox not full
     while (get32(MAILBOX_STATUS) & MAILBOX_FULL) {}

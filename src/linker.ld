@@ -1,7 +1,7 @@
 SECTIONS
 {   
     . = 0x80000;
-    .text.boot : {*(.text.boot)}
+    .text.boot : {KEEP*(.text.boot)}
     .text : {*(.text)}
     .data : {*(.data)}
     .rodata : {*(.rodata)}

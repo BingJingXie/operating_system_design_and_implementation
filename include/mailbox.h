@@ -18,7 +18,7 @@
 #define REQUEST_SUCCEED     0x80000000
 #define TAG_REQUEST_CODE    0x00000000
 
-int mbox_call(uint8_t,uint32_t []);
+int mbox_call(uint8_t,volatile uint32_t []);
 uint32_t get_board_revision(void);
 void get_memory_base_address_and_size();
 #endif
