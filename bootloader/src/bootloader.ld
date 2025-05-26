@@ -1,11 +1,19 @@
+ENTRY(_start)
+
 SECTIONS
 {
-    . = 0x60000;
-    .text : {
-        *(.text.boot)    
-        *(.text)         
+    . = 0x80000;
+    __relocate_start = .;
+    .relocate : {
+        KEEP(*(.text.boot))
+        KEEP(*(.text.main))
+        *(.rodata*)
+        *(.data*)
     }
-    .rodata : { *(.rodata) }
-    .data : { *(.data) }
-    .bss : { *(.bss) }
+    __relocate_end = .;
+
+    . = ALIGN(8);
+    bss_begin = .;
+    .bss : { *(.bss*) }
+    bss_end = .;
 }
