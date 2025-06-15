@@ -23,6 +23,11 @@ master:
     ldr x1, =__relocate_end
     ldr x2, =0x60000
     mov x3, x2
+    sub x4, x1, x0        // size
+    mov  x5, #0x20000
+    cmp  x4, x5
+    b.hs relocate_too_big
+
 
 copy_loop:
     cmp x0, x1
@@ -39,3 +44,10 @@ copy_done:
     add x0, x2, x0              // 計算 relocated_main 在新位置的位址
     br x0                       // 跳轉至 relocated_main
 
+relocate_too_big:
+    ldr x0, oversize_msg
+    bl  uart_send_string
+    b   endless_loop
+
+oversize_msg:
+    .string "Bootloader too large!\r\n"
